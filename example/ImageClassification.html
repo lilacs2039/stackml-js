@@ -1,0 +1,42 @@
+<html>
+<head>
+    <head>
+        <title>Getting Started with StackML</title>
+        <script src="https://stackml.com/library-js/stackml.min.js"></script>
+    </head>
+
+<body>
+<h1>An example to use Image classification model with StackML library</h1>
+<p>The model recognized the image as <span id="className">...</span> with a confidence of <span id="probability">!!!</span></p>
+<img src="https://s3-us-west-2.amazonaws.com/stackml/docs/images/red_fox.jpeg" crossorigin="anonymous" id="red_fox" width="500">
+
+<script>
+    callStackML();
+
+    async function callStackML() {
+        //provide the access key
+        await stackml.init({'accessKeyId': '<YOUR ACCESS KEY>'});
+
+        //load the model
+        const model = await stackml.imageClassifier('MobileNet', callbackLoad);
+
+        // make prediction with the image
+        model.predict(document.getElementById('red_fox'), callbackPredict);
+
+        // callback on model load
+        function callbackLoad() {
+            console.log('model loaded!');
+        }
+
+        // callback after prediction
+        function callbackPredict(err, results) {
+            //display the results
+            document.getElementById('className').innerText =
+                results['outputs'][0].className;
+            document.getElementById('probability').innerText =
+                results['outputs'][0].probability.toFixed(4);
+        }
+    }
+</script>
+</body>
+</html>
