@@ -1,3 +1,7 @@
+
+[example page](https://lilacs2039.github.io/stackml-js/example/ImageClassification.html)
+
+
 # StackML
 [StackML](https://stackml.com/) is a simple GUI tool for non-AI people to use machine learning in browser.
 
